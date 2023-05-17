@@ -1,16 +1,40 @@
+"""A file containing all the CFA masks and related functions.
+"""
+
 import numpy as np
 
 from .spectral_responses.get_spectral_responses import get_filter_response
 
 
-def get_rbgp_bands(file_name):
-    if file_name == 'WV34bands_Spectral_Responses.npz':
+def get_rbgp_bands(file_name: str) -> tuple:
+    """Returns the positions of the red, green, blue and panchromatic bands in a specific filter set.
+
+    Args:
+        file_name (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+
+    Returns:
+        tuple: Tuple indicating the position of the RGBW filters.
+    """
+
+    if file_name == 'dirac':
+        return 'red', 'green', 'blue', 'pan'
+
+    elif file_name == 'WV34bands_Spectral_Responses.npz':
         return 2, 1, 0, 4
 
-    return 'red', 'green', 'blue', 'pan'
 
+def get_bayer_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
+    """Gives the Bayer CFA mask using the specified filters.
 
-def get_bayer_mask(input_shape, spectral_stencil, responses_file):
+    Args:
+        input_shape (tuple): The shape of the input. Will also be the shape of the mask.
+        spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
+        responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+
+    Returns:
+        np.ndarray: The Bayer mask.
+    """
+
     band_r, band_g, band_b, _ = get_rbgp_bands(responses_file)
 
     red_filter = get_filter_response(spectral_stencil, responses_file, band_r)
@@ -25,7 +49,18 @@ def get_bayer_mask(input_shape, spectral_stencil, responses_file):
     return cfa_mask
 
 
-def get_quad_mask(input_shape, spectral_stencil, responses_file):
+def get_quad_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
+    """Gives the Quad-Bayer CFA mask using the specified filters.
+
+    Args:
+        input_shape (tuple): The shape of the input. Will also be the shape of the mask.
+        spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
+        responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+
+    Returns:
+        np.ndarray: The Quad-Bayer mask.
+    """
+
     band_r, band_g, band_b, _ = get_rbgp_bands(responses_file)
 
     red_filter = get_filter_response(spectral_stencil, responses_file, band_r)
@@ -47,7 +82,18 @@ def get_quad_mask(input_shape, spectral_stencil, responses_file):
     return cfa_mask
 
 
-def get_sparse_3_mask(input_shape, spectral_stencil, responses_file):
+def get_sparse_3_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
+    """Gives the Sparse3 CFA mask using the specified filters.
+
+    Args:
+        input_shape (tuple): The shape of the input. Will also be the shape of the mask.
+        spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
+        responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+
+    Returns:
+        np.ndarray: The Sparse3 mask.
+    """
+
     band_r, band_g, band_b, band_p = get_rbgp_bands(responses_file)
 
     red_filter = get_filter_response(spectral_stencil, responses_file, band_r)
