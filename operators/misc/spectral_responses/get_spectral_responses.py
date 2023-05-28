@@ -1,6 +1,3 @@
-"""File containing the tools to retreive the filters from the files.
-"""
-
 import numpy as np
 import scipy as sp
 from os import path
@@ -9,19 +6,7 @@ from os import path
 DATA_DIR = path.join(path.dirname(__file__), 'data')
 
 
-def get_filter_response(spectral_stencil: np.ndarray, responses_file: str, band: str) -> np.ndarray:
-    """Retreive the filter of the correct color from the wanted file.
-    If responses_file is 'dirac' an abstract dirac filter is created.
-
-    Args:
-        spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
-        responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
-        band (str): Name of the band to filter. Must be either 'red', 'blue', 'green' or 'pan'.
-
-    Returns:
-        np.ndarray: The wanted filter.
-    """
-
+def get_filter_response(spectral_stencil, responses_file, band):
     if responses_file == 'dirac':
         return get_dirac_filter(spectral_stencil, band)
 
@@ -33,17 +18,7 @@ def get_filter_response(spectral_stencil: np.ndarray, responses_file: str, band:
         return f(spectral_stencil)
 
 
-def get_dirac_filter(spectral_stencil: np.ndarray, filter_type: str) -> np.ndarray:
-    """Returns a dirac filter of the wanted color.
-
-    Args:
-        spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
-        filter_type (str): Name of the band to filter. Must be either 'red', 'blue', 'green' or 'pan'.
-
-    Returns:
-        np.ndarray: The wanted filter.
-    """
-
+def get_dirac_filter(spectral_stencil, filter_type):
     stencil = np.array(spectral_stencil)
 
     if filter_type == 'red':
