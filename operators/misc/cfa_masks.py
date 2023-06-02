@@ -111,3 +111,69 @@ def get_sparse_3_mask(input_shape: tuple, spectral_stencil: np.ndarray, response
     cfa_mask[4::8, 4::8] = blue_filter
 
     return cfa_mask
+
+
+def get_kodak_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
+    """Gives the Kodak CFA mask using the specified filters.
+    Args:
+        input_shape (tuple): The shape of the input. Will also be the shape of the mask.
+        spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
+        responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+    Returns:
+        np.ndarray: The Kodak mask.
+    """
+
+    band_r, band_g, band_b, band_p = get_rbgp_bands(responses_file)
+
+    red_filter = get_filter_response(spectral_stencil, responses_file, band_r)
+    green_filter = get_filter_response(spectral_stencil, responses_file, band_g)
+    blue_filter = get_filter_response(spectral_stencil, responses_file, band_b)
+    pan_filter = get_filter_response(spectral_stencil, responses_file, band_p)
+
+    cfa_mask = np.kron(np.ones((input_shape[0], input_shape[1], 1)), pan_filter)
+
+    cfa_mask[3::4, 2::4] = red_filter
+    cfa_mask[2::4, 3::4] = red_filter
+
+    cfa_mask[3::4, ::4] = green_filter
+    cfa_mask[2::4, 1::4] = green_filter
+    cfa_mask[1::4, 2::4] = green_filter
+    cfa_mask[::4, 3::4] = green_filter
+
+    cfa_mask[1::4, ::4] = blue_filter
+    cfa_mask[::4, 1::4] = blue_filter
+
+    return cfa_mask
+
+
+def get_sony_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
+    """Gives the Sony CFA mask using the specified filters.
+    Args:
+        input_shape (tuple): The shape of the input. Will also be the shape of the mask.
+        spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
+        responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+    Returns:
+        np.ndarray: The Sony mask.
+    """
+
+    band_r, band_g, band_b, band_p = get_rbgp_bands(responses_file)
+
+    red_filter = get_filter_response(spectral_stencil, responses_file, band_r)
+    green_filter = get_filter_response(spectral_stencil, responses_file, band_g)
+    blue_filter = get_filter_response(spectral_stencil, responses_file, band_b)
+    pan_filter = get_filter_response(spectral_stencil, responses_file, band_p)
+
+    cfa_mask = np.kron(np.ones((input_shape[0], input_shape[1], 1)), pan_filter)
+
+    cfa_mask[3::4, 2::4] = red_filter
+    cfa_mask[1::4, 0::4] = red_filter
+
+    cfa_mask[3::4, ::4] = green_filter
+    cfa_mask[2::4, 1::4] = green_filter
+    cfa_mask[1::4, 2::4] = green_filter
+    cfa_mask[::4, 3::4] = green_filter
+
+    cfa_mask[2::4, 3::4] = blue_filter
+    cfa_mask[::4, 1::4] = blue_filter
+
+    return cfa_mask
