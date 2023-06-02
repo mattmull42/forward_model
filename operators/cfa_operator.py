@@ -5,7 +5,7 @@ import numpy as np
 from scipy.sparse import csr_array
 
 from .abstract_operator import abstract_operator
-from .misc.cfa_masks import get_bayer_mask, get_quad_mask, get_sparse_3_mask
+from .misc.cfa_masks import get_bayer_mask, get_quad_mask, get_sparse_3_mask, get_kodak_mask, get_sony_mask
 
 
 class cfa_operator(abstract_operator):
@@ -31,6 +31,12 @@ class cfa_operator(abstract_operator):
 
         elif self.cfa == 'sparse_3':
             self.cfa_mask = get_sparse_3_mask(input_shape, spectral_stencil, filters)
+
+        elif self.cfa == 'kodak':
+            self.cfa_mask = get_kodak_mask(input_shape, spectral_stencil, filters)
+
+        elif self.cfa == 'sony':
+            self.cfa_mask = get_sony_mask(input_shape, spectral_stencil, filters)
 
         super().__init__(input_shape, input_shape[:-1], self.name)
 

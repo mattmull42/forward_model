@@ -115,10 +115,12 @@ def get_sparse_3_mask(input_shape: tuple, spectral_stencil: np.ndarray, response
 
 def get_kodak_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Kodak CFA mask using the specified filters.
+
     Args:
         input_shape (tuple): The shape of the input. Will also be the shape of the mask.
         spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
         responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+
     Returns:
         np.ndarray: The Kodak mask.
     """
@@ -148,10 +150,12 @@ def get_kodak_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_f
 
 def get_sony_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Sony CFA mask using the specified filters.
+
     Args:
         input_shape (tuple): The shape of the input. Will also be the shape of the mask.
         spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
         responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+
     Returns:
         np.ndarray: The Sony mask.
     """
