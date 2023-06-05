@@ -24,10 +24,10 @@ class cfa_operator(abstract_operator):
         self.name = 'CFA' if name is None else name
 
         if self.cfa == 'bayer_VRBV':
-            self.cfa_mask = get_bayer_mask(input_shape, spectral_stencil, filters)
+            self.cfa_mask = get_bayer_VRBV(input_shape, spectral_stencil, filters)
         
         elif self.cfa == 'bayer_RVVB':
-            self.cfa_mask = get_bayer_bis_mask(input_shape, spectral_stencil, filters)
+            self.cfa_mask = get_bayer_RVVR(input_shape, spectral_stencil, filters)
 
         elif self.cfa == 'quad_bayer':
             self.cfa_mask = get_quad_mask(input_shape, spectral_stencil, filters)

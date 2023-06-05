@@ -23,7 +23,7 @@ def get_rbgp_bands(file_name: str) -> tuple:
         return 2, 1, 0, 4
 
 
-def get_bayer_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
+def get_bayer_VRBV(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Bayer CFA mask using the specified filters.
 
     Args:
@@ -48,7 +48,7 @@ def get_bayer_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_f
 
     return cfa_mask
 
-def get_bayer_bis_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
+def get_bayer_RVVR(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Bayer CFA mask using the specified filters.
 
     Args:
