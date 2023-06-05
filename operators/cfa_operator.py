@@ -40,6 +40,9 @@ class cfa_operator(abstract_operator):
 
         elif self.cfa == 'sony':
             self.cfa_mask = get_sony_mask(input_shape, spectral_stencil, filters)
+        
+        elif self.cfa == 'wang':
+            self.cfa_mask = get_wang_mask(input_shape, spectral_stencil, filters)
 
         super().__init__(input_shape, input_shape[:-1], self.name)
 
