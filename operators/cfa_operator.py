@@ -26,26 +26,6 @@ class cfa_operator(abstract_operator):
         mask = "get_" + self.cfa + "_mask"
 
         self.cfa_mask = eval(mask)(input_shape, spectral_stencil, filters)
-        # if self.cfa == 'bayer_VRBV':
-        #     self.cfa_mask = get_bayer_VRBV(input_shape, spectral_stencil, filters)
-        
-        # elif self.cfa == 'bayer_RVVB':
-        #     self.cfa_mask = get_bayer_RVVR(input_shape, spectral_stencil, filters)
-
-        # elif self.cfa == 'quad_bayer':
-        #     self.cfa_mask = get_quad_mask(input_shape, spectral_stencil, filters)
-
-        # elif self.cfa == 'sparse_3':
-        #     self.cfa_mask = get_sparse_3_mask(input_shape, spectral_stencil, filters)
-
-        # elif self.cfa == 'kodak':
-        #     self.cfa_mask = get_kodak_mask(input_shape, spectral_stencil, filters)
-
-        # elif self.cfa == 'sony':
-        #     self.cfa_mask = get_sony_mask(input_shape, spectral_stencil, filters)
-        
-        # elif self.cfa == 'wang':
-        #     self.cfa_mask = get_wang_mask(input_shape, spectral_stencil, filters)
         
         super().__init__(input_shape, input_shape[:-1], self.name)
 

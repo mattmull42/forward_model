@@ -249,7 +249,7 @@ def get_wang_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_fi
     return cfa_mask
 
 def get_compton_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
-    """Gives the Sony CFA mask using the specified filters.
+    """Gives the Compton CFA mask using the specified filters.
 
     Args:
         input_shape (tuple): The shape of the input. Will also be the shape of the mask.
@@ -257,7 +257,7 @@ def get_compton_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses
         responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
 
     Returns:
-        np.ndarray: The Sony mask.
+        np.ndarray: The Compton mask.
     """
 
     band_r, band_g, band_b, band_p = get_rbgp_bands(responses_file)
@@ -283,7 +283,7 @@ def get_compton_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses
     return cfa_mask
 
 def get_chakrabarti_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
-    """Gives the Sony CFA mask using the specified filters.
+    """Gives the Chakrabarti CFA mask using the specified filters.
 
     Args:
         input_shape (tuple): The shape of the input. Will also be the shape of the mask.
@@ -291,7 +291,7 @@ def get_chakrabarti_mask(input_shape: tuple, spectral_stencil: np.ndarray, respo
         responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
 
     Returns:
-        np.ndarray: The Sony mask.
+        np.ndarray: The Chakrabarti mask.
     """
 
     band_r, band_g, band_b, band_p = get_rbgp_bands(responses_file)
@@ -313,7 +313,7 @@ def get_chakrabarti_mask(input_shape: tuple, spectral_stencil: np.ndarray, respo
     return cfa_mask
 
 def get_kumar_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
-    """Gives the Sony CFA mask using the specified filters.
+    """Gives the Kumar mask using the specified filters.
 
     Args:
         input_shape (tuple): The shape of the input. Will also be the shape of the mask.
@@ -321,7 +321,7 @@ def get_kumar_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_f
         responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
 
     Returns:
-        np.ndarray: The Sony mask.
+        np.ndarray: The Kumar mask.
     """
 
     band_r, band_g, band_b, band_p = get_rbgp_bands(responses_file)
@@ -347,7 +347,7 @@ def get_kumar_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_f
     return cfa_mask
 
 def get_honda_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
-    """Gives the Sony CFA mask using the specified filters.
+    """Gives the Honda CFA mask using the specified filters.
 
     Args:
         input_shape (tuple): The shape of the input. Will also be the shape of the mask.
@@ -355,7 +355,7 @@ def get_honda_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_f
         responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
 
     Returns:
-        np.ndarray: The Sony mask.
+        np.ndarray: The Honda mask.
     """
 
     band_r, band_g, band_b, band_p = get_rbgp_bands(responses_file)
@@ -381,7 +381,7 @@ def get_honda_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_f
     return cfa_mask
 
 def get_yamanaka_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
-    """Gives the Sony CFA mask using the specified filters.
+    """Gives the Yamanaka CFA mask using the specified filters.
 
     Args:
         input_shape (tuple): The shape of the input. Will also be the shape of the mask.
@@ -389,7 +389,7 @@ def get_yamanaka_mask(input_shape: tuple, spectral_stencil: np.ndarray, response
         responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
 
     Returns:
-        np.ndarray: The Sony mask.
+        np.ndarray: The Yamanaka mask.
     """
 
     band_r, band_g, band_b, band_p = get_rbgp_bands(responses_file)
@@ -410,7 +410,7 @@ def get_yamanaka_mask(input_shape: tuple, spectral_stencil: np.ndarray, response
     return cfa_mask
 
 def get_lukac_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
-    """Gives the Sony CFA mask using the specified filters.
+    """Gives the Lukac CFA mask using the specified filters.
 
     Args:
         input_shape (tuple): The shape of the input. Will also be the shape of the mask.
@@ -418,7 +418,7 @@ def get_lukac_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_f
         responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
 
     Returns:
-        np.ndarray: The Sony mask.
+        np.ndarray: The Lukac mask.
     """
 
     band_r, band_g, band_b, band_p = get_rbgp_bands(responses_file)
