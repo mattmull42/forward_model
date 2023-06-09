@@ -22,6 +22,21 @@ def get_rbgp_bands(file_name: str) -> tuple:
     elif file_name == 'WV34bands_Spectral_Responses.npz':
         return 2, 1, 0, 4
 
+def get_color_bands(file_name: str) -> tuple:
+    """Returns the positions of the red, green, blue, yellow, orange and cyan bands in a specific filter set.
+
+    Args:
+        file_name (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+
+    Returns:
+        tuple: Tuple indicating the position of the YOV filters.
+    """
+
+    if file_name == 'dirac':
+        return 'red', 'green', 'blue', 'yellow', 'orange', 'cyan'
+
+    elif file_name == 'AVIRIS176_Spectral_Responses.npz':
+        return 30, 13, 4, 19, 21, 8
 
 def get_bayer_VRBV_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Bayer CFA mask using the specified filters.
@@ -401,5 +416,70 @@ def get_lukac_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_f
 
     cfa_mask[::4, 1::2] = red_filter
     cfa_mask[2::4, ::2] = red_filter
+
+    return cfa_mask
+
+def get_ubt3_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
+    """Gives the UBT3 mask using the specified filters.
+
+    Args:
+        input_shape (tuple): The shape of the input. Will also be the shape of the mask.
+        spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
+        responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+
+    Returns:
+        np.ndarray: The Lukac mask.
+    """
+
+    band_r, band_g, band_b, band_y, _, _ = get_color_bands(responses_file)
+
+    red_filter = get_filter_response(spectral_stencil, responses_file, band_r)
+    green_filter = get_filter_response(spectral_stencil, responses_file, band_g)
+    blue_filter = get_filter_response(spectral_stencil, responses_file, band_b)
+    yellow_filter = get_filter_response(spectral_stencil, responses_file, band_y)
+
+    cfa_mask = np.zeros((input_shape[0], input_shape[1], input_shape[2]))
+
+    cfa_mask[::2, ::2] = green_filter
+    cfa_mask[1::2, ::2] = blue_filter
+    cfa_mask[::2, 1::2] = red_filter
+    cfa_mask[1::2, 1::2] = yellow_filter
+
+
+    return cfa_mask
+
+def get_dbt4_mask(input_shape: tuple, spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
+    """Gives the UBT3 mask using the specified filters.
+
+    Args:
+        input_shape (tuple): The shape of the input. Will also be the shape of the mask.
+        spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
+        responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+
+    Returns:
+        np.ndarray: The Lukac mask.
+    """
+
+    band_r, band_g, band_b, band_y, band_o, _ = get_color_bands(responses_file)
+
+    red_filter = get_filter_response(spectral_stencil, responses_file, band_r)
+    green_filter = get_filter_response(spectral_stencil, responses_file, band_g)
+    blue_filter = get_filter_response(spectral_stencil, responses_file, band_b)
+    yellow_filter = get_filter_response(spectral_stencil, responses_file, band_y)
+    orange_filter = get_filter_response(spectral_stencil, responses_file, band_o)
+
+    cfa_mask = np.kron(np.ones((input_shape[0], input_shape[1], 1)), green_filter)
+
+    cfa_mask[::4, 1::4] = orange_filter
+    cfa_mask[2::4, 3::4] = orange_filter
+    
+    cfa_mask[::4, 3::4] = blue_filter
+    cfa_mask[2::4, 1::4] = blue_filter
+
+    cfa_mask[1::4, 2::4] = red_filter
+    cfa_mask[3::4, ::4] = red_filter
+
+    cfa_mask[1::4, ::4] = yellow_filter
+    cfa_mask[3::4, 2::4] = yellow_filter
 
     return cfa_mask
