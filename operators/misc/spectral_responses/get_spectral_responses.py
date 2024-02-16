@@ -21,7 +21,6 @@ def get_filter_response(spectral_stencil: np.ndarray, responses_file: str, band:
     Returns:
         np.ndarray: The wanted filter.
     """
-
     if responses_file == 'dirac':
         return get_dirac_filter(spectral_stencil, band)
 
@@ -43,7 +42,6 @@ def get_dirac_filter(spectral_stencil: np.ndarray, filter_type: str) -> np.ndarr
     Returns:
         np.ndarray: The wanted filter.
     """
-
     stencil = np.array(spectral_stencil)
 
     if filter_type == 'red':
