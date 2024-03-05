@@ -4,7 +4,7 @@
 import numpy as np
 from scipy.sparse import csr_array
 
-from misc import cfa_patterns
+from .misc import cfa_patterns
 
 
 class cfa_operator():
