@@ -252,6 +252,32 @@ def get_honda_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.n
     return pattern
 
 
+def get_honda2_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
+    """Gives the Honda2 CFA pattern using the specified filters.
+
+    Args:
+        spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
+        responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+
+    Returns:
+        np.ndarray: The Honda2 pattern.
+    """
+    band_r, band_g, band_b, band_p = get_rgbp_bands(responses_file)
+
+    red_filter = get_filter_response(spectral_stencil, responses_file, band_r)
+    green_filter = get_filter_response(spectral_stencil, responses_file, band_g)
+    blue_filter = get_filter_response(spectral_stencil, responses_file, band_b)
+    pan_filter = get_filter_response(spectral_stencil, responses_file, band_p)
+
+    pattern = np.kron(np.ones((2, 2, 1)), pan_filter)
+
+    pattern[1, 0] = red_filter
+    pattern[0, 1] = green_filter
+    pattern[0, 0] = blue_filter
+
+    return pattern
+
+
 def get_kaizu_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Kaizu CFA pattern using the specified filters.
 
