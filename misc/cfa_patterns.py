@@ -636,3 +636,44 @@ def get_binning_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np
     pattern[3, 1] = blue_filter
 
     return pattern
+
+
+def get_random_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
+    """Gives the Random CFA pattern using the specified filters.
+
+    Args:
+        spectral_stencil (np.ndarray): Wavelength values in nanometers at which the input is sampled.
+        responses_file (str): The name of the file in which the filters are. If 'dirac' then abstract dirac filters are used.
+
+    Returns:
+        np.ndarray: The Random pattern.
+    """
+    band_r, band_g, band_b, band_p = get_rgbp_bands(responses_file)
+
+    red_filter = get_filter_response(spectral_stencil, responses_file, band_r)
+    green_filter = get_filter_response(spectral_stencil, responses_file, band_g)
+    blue_filter = get_filter_response(spectral_stencil, responses_file, band_b)
+    pan_filter = get_filter_response(spectral_stencil, responses_file, band_p)
+
+    pattern = np.kron(np.ones((8, 8, 1)), pan_filter)
+
+    pattern[1, 7] = red_filter
+    pattern[3, 1] = red_filter
+    pattern[3, 3] = red_filter
+    pattern[1, 7] = red_filter
+    pattern[1, 7] = red_filter
+
+    pattern[1, 3] = green_filter
+    pattern[3, 7] = green_filter
+    pattern[5, 3] = green_filter
+    pattern[5, 5] = green_filter
+    pattern[7, 7] = green_filter
+
+    pattern[1, 1] = blue_filter
+    pattern[1, 5] = blue_filter
+    pattern[3, 5] = blue_filter
+    pattern[5, 1] = blue_filter
+    pattern[7, 3] = blue_filter
+    pattern[7, 5] = blue_filter
+
+    return pattern
