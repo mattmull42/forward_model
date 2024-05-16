@@ -524,13 +524,17 @@ def get_yamanaka_pattern(spectral_stencil: np.ndarray, responses_file: str) -> n
     green_filter = get_filter_response(spectral_stencil, responses_file, band_g)
     blue_filter = get_filter_response(spectral_stencil, responses_file, band_b)
 
-    pattern = np.kron(np.ones((2, 4, 1)), green_filter)
+    pattern = np.kron(np.ones((4, 4, 1)), green_filter)
 
     pattern[0, 1] = red_filter
     pattern[1, 3] = red_filter
+    pattern[2, 1] = red_filter
+    pattern[3, 3] = red_filter
 
     pattern[1, 1] = blue_filter
     pattern[0, 3] = blue_filter
+    pattern[3, 1] = blue_filter
+    pattern[2, 3] = blue_filter
 
     return pattern
 
@@ -551,13 +555,17 @@ def get_lukac_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.n
     green_filter = get_filter_response(spectral_stencil, responses_file, band_g)
     blue_filter = get_filter_response(spectral_stencil, responses_file, band_b)
 
-    pattern = np.kron(np.ones((4, 2, 1)), green_filter)
+    pattern = np.kron(np.ones((4, 4, 1)), green_filter)
 
     pattern[0, 1] = red_filter
     pattern[2, 0] = red_filter
+    pattern[0, 3] = red_filter
+    pattern[2, 2] = red_filter
 
     pattern[1, 1] = blue_filter
     pattern[3, 0] = blue_filter
+    pattern[1, 3] = blue_filter
+    pattern[3, 2] = blue_filter
 
     return pattern
 
