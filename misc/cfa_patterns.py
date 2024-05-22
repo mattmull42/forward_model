@@ -668,8 +668,8 @@ def get_random_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.
     pattern[1, 7] = red_filter
     pattern[3, 1] = red_filter
     pattern[3, 3] = red_filter
-    pattern[1, 7] = red_filter
-    pattern[1, 7] = red_filter
+    pattern[5, 7] = red_filter
+    pattern[7, 1] = red_filter
 
     pattern[1, 3] = green_filter
     pattern[3, 7] = green_filter
