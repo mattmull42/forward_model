@@ -8,7 +8,7 @@ from .misc import cfa_patterns
 
 
 class cfa_operator():
-    def __init__(self, cfa: str, input_shape: tuple, spectral_stencil: np.ndarray, filters: str='dirac') -> None:
+    def __init__(self, cfa: str, input_shape: tuple, spectral_stencil: np.ndarray=[650, 525, 480], filters: str='dirac') -> None:
         """Creates an instane of the cfa_operator class.
 
         Args:
