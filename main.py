@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from cfa_operator import cfa_operator
 
 
-def main():
+def main() -> None:
     x = np.empty((10, 15, 3))
 
     CFAS = sorted(['bayer_GRBG', 'quad_bayer', 'gindele', 'chakrabarti', 'hamilton', 'honda', 'kaizu', 'kodak', 'sony', 'sparse_3', 'wang', 'yamagami', 'yamanaka', 'bayer_RGGB', 'lukac', 'xtrans', 'luo', 'binning', 'honda2', 'random'])

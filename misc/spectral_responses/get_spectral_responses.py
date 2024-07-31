@@ -3,10 +3,7 @@
 
 import numpy as np
 import scipy as sp
-from os import path
-
-
-DATA_DIR = path.join(path.dirname(__file__), 'data')
+from pathlib import Path
 
 
 def get_filter_response(spectral_stencil: np.ndarray, responses_file: str, band: str) -> np.ndarray:
@@ -25,7 +22,7 @@ def get_filter_response(spectral_stencil: np.ndarray, responses_file: str, band:
         return get_dirac_filter(spectral_stencil, band)
 
     else:
-        array = np.load(path.join(DATA_DIR, responses_file))
+        array = np.load(Path(__file__).parent.joinpath('data', responses_file))
         f = sp.interpolate.interp1d(array['spectral_stencil'], array['data'][band])
 
         return f(spectral_stencil)
