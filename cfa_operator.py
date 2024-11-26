@@ -1,5 +1,4 @@
-"""The file describing the CFA operator.
-"""
+"""The file describing the CFA operator."""
 
 import numpy as np
 from scipy.sparse import csr_array
@@ -7,8 +6,14 @@ from scipy.sparse import csr_array
 from .misc import cfa_patterns
 
 
-class cfa_operator():
-    def __init__(self, cfa: str, input_shape: tuple, spectral_stencil: np.ndarray=[650, 525, 480], filters: str='dirac') -> None:
+class cfa_operator:
+    def __init__(
+        self,
+        cfa: str,
+        input_shape: tuple,
+        spectral_stencil: np.ndarray = [650, 525, 480],
+        filters: str = "dirac",
+    ) -> None:
         """Creates an instane of the cfa_operator class.
 
         Args:
@@ -18,15 +23,21 @@ class cfa_operator():
             filters (str): The name of the filters to use for the operation. Default is dirac.
         """
         self.cfa = cfa
-        self.pattern = getattr(cfa_patterns, f'get_{cfa}_pattern')(spectral_stencil, filters)
+        self.pattern = getattr(cfa_patterns, f"get_{cfa}_pattern")(
+            spectral_stencil, filters
+        )
         self.pattern_shape = self.pattern.shape
         self.input_shape = input_shape
         self.output_shape = input_shape[:-1]
 
-        n = input_shape[0] // self.pattern_shape[0] + (input_shape[0] % self.pattern_shape[0] != 0)
-        m = input_shape[1] // self.pattern_shape[1] + (input_shape[1] % self.pattern_shape[1] != 0)
+        n = input_shape[0] // self.pattern_shape[0] + (
+            input_shape[0] % self.pattern_shape[0] != 0
+        )
+        m = input_shape[1] // self.pattern_shape[1] + (
+            input_shape[1] % self.pattern_shape[1] != 0
+        )
 
-        self.mask = np.tile(self.pattern, (n, m, 1))[:input_shape[0], :input_shape[1]]
+        self.mask = np.tile(self.pattern, (n, m, 1))[: input_shape[0], : input_shape[1]]
 
     def direct(self, x: np.ndarray) -> np.ndarray:
         """A method method performing the computation of the operator.
@@ -64,6 +75,8 @@ class cfa_operator():
         cfa_i = np.repeat(np.arange(N_ij), N_k)
         cfa_j = np.arange(N_ijk)
 
-        cfa_data = self.mask[cfa_i // self.input_shape[1], cfa_i % self.input_shape[1], cfa_j % N_k]
+        cfa_data = self.mask[
+            cfa_i // self.input_shape[1], cfa_i % self.input_shape[1], cfa_j % N_k
+        ]
 
         return csr_array((cfa_data, (cfa_i, cfa_j)), shape=(N_ij, N_ijk))
