@@ -21,9 +21,7 @@ def get_rgbp_bands(file_name: str) -> tuple:
         return 2, 1, 0, 4
 
 
-def get_bayer_GRBG_pattern(
-    spectral_stencil: np.ndarray, responses_file: str
-) -> np.ndarray:
+def get_bayer_GRBG_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Bayer GRBG CFA pattern using the specified filters.
 
     Args:
@@ -47,9 +45,7 @@ def get_bayer_GRBG_pattern(
     return pattern
 
 
-def get_bayer_RGGB_pattern(
-    spectral_stencil: np.ndarray, responses_file: str
-) -> np.ndarray:
+def get_bayer_RGGB_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Bayer RGGB CFA pattern using the specified filters.
 
     Args:
@@ -73,9 +69,7 @@ def get_bayer_RGGB_pattern(
     return pattern
 
 
-def get_quad_bayer_pattern(
-    spectral_stencil: np.ndarray, responses_file: str
-) -> np.ndarray:
+def get_quad_bayer_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Quad-Bayer CFA pattern using the specified filters.
 
     Args:
@@ -106,9 +100,7 @@ def get_quad_bayer_pattern(
     return pattern
 
 
-def get_sparse_3_pattern(
-    spectral_stencil: np.ndarray, responses_file: str
-) -> np.ndarray:
+def get_sparse_3_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Sparse3 CFA pattern using the specified filters.
 
     Args:
@@ -203,9 +195,7 @@ def get_sony_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.nd
     return pattern
 
 
-def get_chakrabarti_pattern(
-    spectral_stencil: np.ndarray, responses_file: str
-) -> np.ndarray:
+def get_chakrabarti_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Chakrabarti CFA pattern using the specified filters.
 
     Args:
@@ -330,9 +320,7 @@ def get_kaizu_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.n
     return pattern
 
 
-def get_yamagami_pattern(
-    spectral_stencil: np.ndarray, responses_file: str
-) -> np.ndarray:
+def get_yamagami_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Yamagami CFA pattern using the specified filters.
 
     Args:
@@ -365,9 +353,7 @@ def get_yamagami_pattern(
     return pattern
 
 
-def get_gindele_pattern(
-    spectral_stencil: np.ndarray, responses_file: str
-) -> np.ndarray:
+def get_gindele_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Gindele CFA pattern using the specified filters.
 
     Args:
@@ -393,9 +379,7 @@ def get_gindele_pattern(
     return pattern
 
 
-def get_hamilton_pattern(
-    spectral_stencil: np.ndarray, responses_file: str
-) -> np.ndarray:
+def get_hamilton_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Hamilton CFA pattern using the specified filters.
 
     Args:
@@ -523,9 +507,7 @@ def get_wang_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.nd
     return pattern
 
 
-def get_yamanaka_pattern(
-    spectral_stencil: np.ndarray, responses_file: str
-) -> np.ndarray:
+def get_yamanaka_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Yamanaka CFA pattern using the specified filters.
 
     Args:
@@ -626,9 +608,7 @@ def get_xtrans_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.
     return pattern
 
 
-def get_binning_pattern(
-    spectral_stencil: np.ndarray, responses_file: str
-) -> np.ndarray:
+def get_binning_pattern(spectral_stencil: np.ndarray, responses_file: str) -> np.ndarray:
     """Gives the Binning CFA pattern using the specified filters.
 
     Args:

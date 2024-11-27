@@ -23,19 +23,13 @@ class cfa_operator:
             filters (str): The name of the filters to use for the operation. Default is dirac.
         """
         self.cfa = cfa
-        self.pattern = getattr(cfa_patterns, f"get_{cfa}_pattern")(
-            spectral_stencil, filters
-        )
+        self.pattern = getattr(cfa_patterns, f"get_{cfa}_pattern")(spectral_stencil, filters)
         self.pattern_shape = self.pattern.shape
         self.input_shape = input_shape
         self.output_shape = input_shape[:-1]
 
-        n = input_shape[0] // self.pattern_shape[0] + (
-            input_shape[0] % self.pattern_shape[0] != 0
-        )
-        m = input_shape[1] // self.pattern_shape[1] + (
-            input_shape[1] % self.pattern_shape[1] != 0
-        )
+        n = input_shape[0] // self.pattern_shape[0] + (input_shape[0] % self.pattern_shape[0] != 0)
+        m = input_shape[1] // self.pattern_shape[1] + (input_shape[1] % self.pattern_shape[1] != 0)
 
         self.mask = np.tile(self.pattern, (n, m, 1))[: input_shape[0], : input_shape[1]]
 
